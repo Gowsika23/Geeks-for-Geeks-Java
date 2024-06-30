@@ -1,2 +1,2 @@
 # Geeks-for-Geeks-Java
-Solved Codes in Java laguage
+Solved Problems in Java laguage
