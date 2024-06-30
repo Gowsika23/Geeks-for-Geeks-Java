@@ -1,0 +1,32 @@
+class Solution {
+    static int getLastDigit(String a, String b) {
+        // Get the last digit of the base
+        int lastDigitA = a.charAt(a.length() - 1) - '0';
+        
+        // If the exponent b is "0", any number to the power of 0 is 1
+        if (b.equals("0")) {
+            return 1;
+        }
+        
+        // Determine the cycle of the last digit of powers
+        int[] cycle = new int[4];
+        cycle[0] = lastDigitA % 10;
+        for (int i = 1; i < 4; i++) {
+            cycle[i] = (cycle[i - 1] * lastDigitA) % 10;
+        }
+        
+        // Compute the effective exponent (b mod 4)
+        int exponentMod4 = 0;
+        for (char ch : b.toCharArray()) {
+            exponentMod4 = (exponentMod4 * 10 + (ch - '0')) % 4;
+        }
+        
+        // If exponentMod4 is 0, it means we are at the end of the cycle
+        if (exponentMod4 == 0) {
+            exponentMod4 = 4;
+        }
+        
+        // Return the corresponding last digit from the cycle
+        return cycle[exponentMod4 - 1];
+    }
+}
